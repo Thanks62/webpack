@@ -1,0 +1,8 @@
+table{
+	margin: auto;
+	border: saddlebrown solid 1px;
+}
+td,th{
+	min-width: 130px;
+	border: #000000 solid 1px;
+}
