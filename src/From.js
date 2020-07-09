@@ -37,15 +37,12 @@ class Forms extends Component {
 		const onFinish = () => {
             const storage=window.localStorage;
             let list=[];
-            /*list.push(JSON.parse(storage.getItem("list")));
-            console.log(list);
-            list=list?list.push(this.state):this.state;*/
-            if(JSON.parse(storage.getItem("list"))){
-                console.log(storage.getItem("list"));
-                //list.push(JSON.parse(storage.getItem("list")));
-
-            }
-            list.push(this.state);
+            list=JSON.parse(storage.getItem("list"));
+            list=list.filter((li)=>{
+                return li.id!=this.state.id;
+            })
+            if(list) list.push(this.state);
+            else list=[this.state];
 			storage.setItem("list",JSON.stringify(list));
 			this.setState({
 				id : document.getElementById('ID').value
@@ -55,8 +52,7 @@ class Forms extends Component {
 			this.setState({
 				id : new Date()
 			});	
-            //window.location.reload();
-            console.log('submit');
+            window.location.reload();
 		  };
         return (
 			<center>

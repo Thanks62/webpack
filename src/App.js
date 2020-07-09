@@ -15,19 +15,10 @@ class App extends Component{
     init=()=>{
         if(window.localStorage){
             const storage=window.localStorage;
-            for(let i=0;i<storage.length;i++){
-            console.log(i);
-            console.log(storage.key(i));
-            const key=storage.key(i);
-            const item={
-                id:key,
-                name:storage.getItem(key).name,
-                job:storage.getItem(key).job
-            }
-            console.log(JSON.parse(JSON.stringify(storage.getItem(key))).name)
-            this.state.characters.push(item);
+            let list=storage.getItem("list");
+            this.state.characters=JSON.parse(list);
         }
-        }
+        
         
     }
     removeCharacter = (index,id) => {
