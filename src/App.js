@@ -3,6 +3,7 @@ import { Row,Col, Divider,Card } from 'antd';
 import './App.css'
 import Forms from './From'
 import Table from './Table'
+import { List } from 'antd/lib/form/Form';
 class App extends Component{
     state = {
         characters: [],
@@ -17,9 +18,10 @@ class App extends Component{
             const storage=window.localStorage;
             let list=storage.getItem("list");
             this.state.characters=JSON.parse(list);
-        }
-        
-        
+            this.setState({
+                characters:JSON.parse(list)
+            })
+        } 
     }
     removeCharacter = (index,id) => {
         const { characters } = this.state;
@@ -29,7 +31,12 @@ class App extends Component{
                 return i !== index;
             })
         });
-        storage.removeItem(id);
+        let list=JSON.parse(storage.getItem("list"));
+        //去掉原有数据（edit情况）
+        list=list.filter((li)=>{
+            return li.id!=id;
+        })
+        storage.setItem("list",JSON.stringify(list));
     }
 
     editList = (index)=>{
@@ -63,7 +70,7 @@ class App extends Component{
                             removeCharacter={this.removeCharacter}
                             editList={this.editList}></Table>
                     <Divider orientation="center">Add New</Divider>
-                    <Forms  handleSubmit={this.handleSubmit} onRef={this.onRef}/>
+                    <Forms  handleSubmit={this.handleSubmit} onRef={this.onRef} init={this.init}/>
                 </div>
             </Card>
         </Col>

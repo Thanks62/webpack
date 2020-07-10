@@ -3,12 +3,21 @@ import './Form.css'
 import { Form, Input, Button} from 'antd';
 
 class Forms extends Component {
+	state={
+		loading:false,
+		btnText:'',
+		btnDisable:false,
+		danger:false,
+		err:true
+	}
     constructor(props) {
         super(props);
         this.initialState = {
 			id:new Date(),
 			name: '',
-            job: ''
+			job: '',
+			btnText:'Add',
+			err:true
         };
 
         this.state = this.initialState;
@@ -17,7 +26,7 @@ class Forms extends Component {
     handleChange = event => {
         const { name, value } = event.target;
         this.setState({
-            [name] : value
+			[name] : value
 		});
 		
     }
@@ -29,30 +38,66 @@ class Forms extends Component {
 		this.setState({
 			id:id,
 			name:name,
-			job:job
+			job:job,
+			btnText:'Edit'
 		})
 	}
 
     render() {
+		const {btnText}=this.state;
 		const onFinish = () => {
-            const storage=window.localStorage;
-            let list=[];
-            list=JSON.parse(storage.getItem("list"));
-            list=list.filter((li)=>{
-                return li.id!=this.state.id;
-            })
-            if(list) list.push(this.state);
-            else list=[this.state];
-			storage.setItem("list",JSON.stringify(list));
-			this.setState({
-				id : document.getElementById('ID').value
-			});
-			this.props.handleSubmit(this.state);
-			this.setState(this.initialState);	
-			this.setState({
-				id : new Date()
-			});	
-            window.location.reload();
+			setTimeout(() => {
+				this.setState({
+					loading:false,
+					btnDisable:false,
+				})
+				if(this.state.err){
+					this.setState({
+						loading:false,
+						btnDisable:false,
+						danger:true,
+						btnText:'Failed',
+						id:new Date(),
+						name: '',
+						job: '',
+					})
+					setTimeout(()=>{
+						this.setState({
+							btnText:'Add',
+							danger:false
+						})
+					},1000)
+				}
+				else{
+					const storage=window.localStorage;
+					let list=[];
+					list=JSON.parse(storage.getItem("list"));
+					//去掉原有数据（edit情况）
+					list=list.filter((li)=>{
+						return li.id!=this.state.id;
+					})
+					//新增当前数据
+					if(list) list.push(this.state);
+					else list=[this.state];
+					storage.setItem("list",JSON.stringify(list));
+					this.setState({
+						id : document.getElementById('ID').value,
+						btnText:'Successfully'
+					});
+					this.props.handleSubmit(this.state);
+					setTimeout(()=>{
+						this.setState(this.initialState);
+					},1000)
+					
+					this.props.init();
+				}
+				
+			}, 2000);
+            this.setState({
+				loading:true,
+				btnDisable:true,
+				danger:false
+			})
 		  };
         return (
 			<center>
@@ -69,8 +114,8 @@ class Forms extends Component {
 					>
 						<Input name="job" value={this.state.job} onChange={this.handleChange}/>
 					</Form.Item>
-				    <Button type="primary" htmlType="submit">
-				        Add
+				    <Button type="primary" htmlType="submit" loading={this.state.loading} disabled={this.state.btnDisable} danger={this.state.danger}>
+				        {this.state.btnText}
 				    </Button>
 				</Form>
 			</center>
