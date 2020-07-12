@@ -16,20 +16,23 @@ const TableHeader = () => {
 }
 
 const TableBody = props => { 
-    const rows = props.characterData.map((row, index) => {
-        return (
-			<tr key={index}>
-				<td>{row.name}</td>
-				<td>{row.job}</td>
-				<td>
-                    <Button type="text" onClick={() => props.editList(index)}>Edit</Button>
-                    <Button type="text" onClick={() => props.removeCharacter(index,row.id)}>Delete</Button>
-                </td>
-			</tr>
-        );
-    });
-
-    return <tbody>{rows}</tbody>;
+    if(props.characterData){
+    	const rows = props.characterData.map((row, index) => {
+    	    return (
+    			<tr key={index}>
+    				<td>{row.name}</td>
+    				<td>{row.job}</td>
+    				<td>
+    	                <Button type="text" onClick={() => props.editList(index)}>Edit</Button>
+    	                <Button type="text" onClick={() => props.removeCharacter(index,row.id)}>Delete</Button>
+    	            </td>
+    			</tr>
+    	    );
+    	});
+    	
+    	return <tbody>{rows}</tbody>;
+    }
+    return <tbody></tbody>;
 }
 
 const Table = (props) => {
