@@ -1,11 +1,10 @@
 import React, { Component } from 'react';
 import { Row,Col, Divider,Card } from 'antd';
 import './App.css'
-import Forms from './From'
-import Table from './Table'
-import { List } from 'antd/lib/form/Form';
+import ToDoList from './container/ToDoList'
+import AddToDo from './container/AddToDo'
 class App extends Component{
-    state = {
+    /*state = {
         characters: [],
         edit:[]
     };
@@ -75,6 +74,25 @@ class App extends Component{
             </Card>
         </Col>
     </Row>)
-    }
+    }*/
+	render(){
+		return(
+				<Row justify="center" align="middle">
+				    <Col>
+				        <Card style={{width:600}} className="Content">
+				            <div className="container">
+				                <h1>List</h1>
+				                <p>A Todo List</p>
+								<ToDoList></ToDoList>
+				                <Divider orientation="center">Add New</Divider>
+								<AddToDo></AddToDo>
+							</div>
+				        </Card>
+				    </Col>
+				</Row>
+			)
+	}
+	
+	
 }
 export default App;
