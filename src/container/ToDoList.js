@@ -5,8 +5,8 @@ const mapsStateToProps=state=>{
 	const storage=window.localStorage;
 	if(state.data) storage.setItem("list",JSON.stringify(state.data));
 	return{	
-		data:state.data,
-		input_data:state.input_data
+		data:state.todos.data,
+		input_data:state.todos.input_data
 	}
 }
 const mapDispatchToProps=dispatch=>{

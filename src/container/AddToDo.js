@@ -1,13 +1,14 @@
 import {connect} from 'react-redux';
 import Forms from '../Forms.js';
-import {addToDo,editToDo,inputData,isLoading,finish,fail} from '../action/index'
+import {addToDo,editToDo,inputData} from '../action/index'
+import {isLoading,finish,fail} from '../action/uiState'
 const mapStateToProps=state=>{
 	const storage=window.localStorage;
 	if(state.data) storage.setItem("list",JSON.stringify(state.data));
 	return {	
-		data:state.data,
-		input_data:state.input_data,
-		Loading:state.Loading
+		data:state.todos.data,
+		input_data:state.todos.input_data,
+		Loading:state.uiReducer.Loading
 	}
 }
 const mapDispatchToProps=dispatch=>{
