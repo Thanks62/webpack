@@ -15,10 +15,10 @@ class Forms extends Component{
 			job: '',
 	    };
 		this.state = this.initialState;
+		//监听状态变化
 		store.subscribe(()=>{
 			setTimeout(()=>{
-				console.log(this.props)
-				if(this.props.input_data&&!this.props.Loading){
+				if(this.props.input_data&&!this.props.Loading&&!this.state.err){
 					this.setState({
 						id:this.props.input_data.id,
 						name:this.props.input_data.name,
@@ -27,7 +27,6 @@ class Forms extends Component{
 					})
 				}
 			},100)
-			
 		})
 	}
 	handleChange = event => {
@@ -39,12 +38,21 @@ class Forms extends Component{
 	onFinish = () => {	
 		this.props.onLoading();
 		setTimeout(()=>{
+			//随机生成错误
+			let err=Math.random();
+			switch(true){
+				case err<0.5:this.setState({err:false});break;
+				default:this.setState({err:true});break;
+			}
+			//错误
 			if(this.state.err){
+				this.props.onFail();
 				this.setState({
 					btnText:'Failed',
 					danger:true,
 				})
 			}
+			//成功提交
 			else{
 				if(this.state.btnText==='Add')
 					this.props.onAdd(this.state.name,this.state.id,this.state.job);
@@ -55,11 +63,13 @@ class Forms extends Component{
 				this.setState({
 					btnText:'Successfully'
 				})
-			}		
+			}
+			//状态复原
 			setTimeout(()=>{
 				this.setState({
 					btnText:'Add',
-					danger:false
+					danger:false,
+					err:false
 				})
 			},1000)
 		},2000)

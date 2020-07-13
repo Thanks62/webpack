@@ -1,4 +1,4 @@
-import {ADD_TODO,REMOVE_TODO,DEFAULT,EDIT_TODO,INPUT_DATA,IS_LOADING,FINISH} from'../action/index.js';
+import {ADD_TODO,REMOVE_TODO,DEFAULT,EDIT_TODO,INPUT_DATA,IS_LOADING,FINISH,FAIL} from'../action/index.js';
 var initState={};
 function init(){
 	if (window.localStorage){
@@ -64,6 +64,7 @@ export default function(state=initState,action){
 			Loading:action.loading
 		}
 		case FINISH:
+		case FAIL:
 		return{
 			data:state.data,
 			input_data:state.input_data,

@@ -1,6 +1,6 @@
 import {connect} from 'react-redux';
 import Forms from '../Forms.js';
-import {addToDo,editToDo,inputData,isLoading,finish} from '../action/index'
+import {addToDo,editToDo,inputData,isLoading,finish,fail} from '../action/index'
 const mapStateToProps=state=>{
 	const storage=window.localStorage;
 	if(state.data) storage.setItem("list",JSON.stringify(state.data));
@@ -26,6 +26,9 @@ const mapDispatchToProps=dispatch=>{
 		},
 		onFinishData:(loading)=>{
 			dispatch(finish(false));
+		},
+		onFail:(loading)=>{
+			dispatch(fail(false));
 		}
 	}
 }
