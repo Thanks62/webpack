@@ -3,7 +3,7 @@ import {removeToDo,inputData} from '../action/index';
 import Tables from '../Tables';
 const mapsStateToProps=state=>{
 	const storage=window.localStorage;
-	if(state.data) storage.setItem("list",JSON.stringify(state.data));
+	if(state.todos.data) storage.setItem("list",JSON.stringify(state.todos.data));
 	return{	
 		data:state.todos.data,
 		input_data:state.todos.input_data

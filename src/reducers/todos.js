@@ -20,9 +20,7 @@ function init(){
 init();
 export default function(state=initState,action){
 	switch(action.type){
-		case ADD_TODO:
-		console.log(state);
-		return{
+		case ADD_TODO:return{
 			...state,
 			data:[
 				...state.data,
