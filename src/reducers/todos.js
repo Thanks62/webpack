@@ -1,4 +1,4 @@
-import {ADD_TODO,REMOVE_TODO,DEFAULT,EDIT_TODO,INPUT_DATA} from'../action/index.js';
+import {ADD_TODO,REMOVE_TODO,DEFAULT,EDIT_TODO,INPUT_DATA,IS_LOADING,FINISH} from'../action/index.js';
 var initState={};
 function init(){
 	if (window.localStorage){
@@ -10,10 +10,12 @@ function init(){
 				id:new Date().toString(),
 				name:'',
 				job:''
-			}
+			},
+			Loading:false
 			}:{
 				data:[],
-				input_data:{}
+				input_data:{},
+				Loading:false
 			};
 	}
 }
@@ -55,6 +57,18 @@ export default function(state=initState,action){
 			name:action.data.text,
 			job:action.data.time
 		}}
+		case IS_LOADING:
+		return{
+			data:state.data,
+			input_data:state.input_data,
+			Loading:action.loading
+		}
+		case FINISH:
+		return{
+			data:state.data,
+			input_data:state.input_data,
+			Loading:action.loading
+		}
 		case DEFAULT:
 		default:return state;
 	}

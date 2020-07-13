@@ -9,7 +9,6 @@ class Forms extends Component{
 	    this.initialState = {
 			btnText:'Add',
 			err:false,
-			loading:false,
 			danger:false,
 			id:new Date(),
 			name: '',
@@ -18,7 +17,8 @@ class Forms extends Component{
 		this.state = this.initialState;
 		store.subscribe(()=>{
 			setTimeout(()=>{
-				if(this.props.input_data){
+				console.log(this.props)
+				if(this.props.input_data&&!this.props.Loading){
 					this.setState({
 						id:this.props.input_data.id,
 						name:this.props.input_data.name,
@@ -37,27 +37,22 @@ class Forms extends Component{
 		});
 	}
 	onFinish = () => {	
-		console.log(this.props);
-		this.setState({
-			loading:true
-		})
+		this.props.onLoading();
 		setTimeout(()=>{
 			if(this.state.err){
 				this.setState({
-					loading:false,
 					btnText:'Failed',
 					danger:true,
 				})
 			}
 			else{
-				console.log(this.state);
 				if(this.state.btnText==='Add')
 					this.props.onAdd(this.state.name,this.state.id,this.state.job);
 				else if(this.state.btnText==='Edit')
 					this.props.onEdit(this.state.id,this.state.name,this.state.job);
 				this.state.id=new Date();
+				this.props.onFinishData();
 				this.setState({
-					loading:false,
 					btnText:'Successfully'
 				})
 			}		
@@ -85,7 +80,7 @@ class Forms extends Component{
 				>
 					<Input name="job" value={this.state.job}  onChange={this.handleChange}/>
 				</Form.Item>
-			    <Button type="primary" htmlType="submit" loading={this.state.loading} disabled={this.state.loading} danger={this.state.danger} onChange={this.handleChange}>
+			    <Button type="primary" htmlType="submit" loading={this.props.Loading} disabled={this.props.Loading} danger={this.state.danger}>
 			        {this.state.btnText}
 			    </Button>
 			</Form>
