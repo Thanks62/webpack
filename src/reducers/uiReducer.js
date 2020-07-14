@@ -1,11 +1,7 @@
 import {IS_LOADING,FINISH,FAIL} from'../action/uiState.js';
 var initState={};
 function init(){
-	if (window.localStorage){
-        const storage=window.localStorage;
-        let list=storage.getItem("list");
-        initState={Loading:false}
-	}
+	initState={Loading:false}
 }
 init();
 export default function(state=initState,action){

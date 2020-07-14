@@ -18,15 +18,20 @@ class Forms extends Component{
 		//监听状态变化
 		store.subscribe(()=>{
 			setTimeout(()=>{
-				if(this.props.input_data.name !=''&&!this.props.Loading&&!this.state.err){
+				this.id.state.value=this.props.input_data.id;
+				this.name.state.value=this.props.input_data.name;
+				this.job.state.value=this.props.input_data.job;
+				
+				let isEdit=this.props.data.filter((data)=>{
+					return data.id===this.props.input_data.id
+				})
+				if(isEdit!={}&&!this.props.Loading&&!this.state.err){
 					this.setState({
 						btnText:'Edit'
 					})
-					this.id.state.value=this.props.input_data.id;
-					this.name.state.value=this.props.input_data.name;
-					this.job.state.value=this.props.input_data.job;
+					isEdit={};
 				}
-			},100)
+			},200)
 		})
 	}
 	handleChange = event => {
@@ -53,8 +58,7 @@ class Forms extends Component{
 				this.props.onFail();
 				this.setState({
 					btnText:'Failed',
-					danger:true,
-					id:new Date()
+					danger:true
 				})
 			}
 			//成功提交
@@ -70,8 +74,8 @@ class Forms extends Component{
 			}
 			//状态复原
 			setTimeout(()=>{
+				this.props.onChangeInput(new Date(),this.name.state.value,this.job.state.value)
 				this.setState({
-					id:new Date(),
 					btnText:'Add',
 					danger:false,
 					err:false
