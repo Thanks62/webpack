@@ -18,7 +18,7 @@ class Forms extends Component{
 		//监听状态变化
 		store.subscribe(()=>{
 			setTimeout(()=>{
-				if(this.props.input_data&&!this.props.Loading&&!this.state.err){
+				if(this.props.input_data.name !=''&&!this.props.Loading&&!this.state.err){
 					this.setState({
 						id:this.props.input_data.id,
 						name:this.props.input_data.name,
@@ -50,6 +50,7 @@ class Forms extends Component{
 				this.setState({
 					btnText:'Failed',
 					danger:true,
+					id:new Date()
 				})
 			}
 			//成功提交
@@ -58,7 +59,6 @@ class Forms extends Component{
 					this.props.onAdd(this.state.name,this.state.id,this.state.job);
 				else if(this.state.btnText==='Edit')
 					this.props.onEdit(this.state.id,this.state.name,this.state.job);
-				this.state.id=new Date();
 				this.props.onFinishData();
 				this.setState({
 					btnText:'Successfully'
@@ -67,6 +67,7 @@ class Forms extends Component{
 			//状态复原
 			setTimeout(()=>{
 				this.setState({
+					id:new Date(),
 					btnText:'Add',
 					danger:false,
 					err:false
