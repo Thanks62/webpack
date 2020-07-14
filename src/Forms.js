@@ -2,8 +2,9 @@ import React, {Component} from 'react';
 import './Form.css'
 import { Form, Input, Button} from 'antd';
 import store from './store/index'
+import ReduxForm from './ReduxForm'
 class Forms extends Component{
-	state={}
+	/*state={}
 	constructor(props) {
 	    super(props);
 	    this.initialState = {
@@ -100,6 +101,13 @@ class Forms extends Component{
 			    </Button>
 			</Form>
 		</center>)
-	}
+	}*/
+	submit = values => {
+		// print the form values to the console
+		console.log(values)
+	  }
+	  render() {
+		return <ReduxForm onSubmit={this.submit} />
+	  }
 }
 export default Forms;
