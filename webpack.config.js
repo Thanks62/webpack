@@ -7,7 +7,6 @@ module.exports = {
     main:'./src/index.js'
   },
   plugins:[
-    new CleanWebpackPlugin(),
     new HtmlWebpackPlugin({
       title:'start'
     }),
@@ -19,7 +18,6 @@ module.exports = {
     path: path.resolve(__dirname, 'dist')
   },
   mode:"production",
-  devtool:'inline-source-map',
   devServer:{
     contentBase:'./dist',
     hot:true

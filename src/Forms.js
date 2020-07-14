@@ -20,11 +20,11 @@ class Forms extends Component{
 			setTimeout(()=>{
 				if(this.props.input_data.name !=''&&!this.props.Loading&&!this.state.err){
 					this.setState({
-						id:this.props.input_data.id,
-						name:this.props.input_data.name,
-						job:this.props.input_data.job,
 						btnText:'Edit'
 					})
+					this.id.state.value=this.props.input_data.id;
+					this.name.state.value=this.props.input_data.name;
+					this.job.state.value=this.props.input_data.job;
 				}
 			},100)
 		})
@@ -34,8 +34,12 @@ class Forms extends Component{
         this.setState({
 			[name] : value
 		});
+		this.props.onChangeInput(this.id.state.value,this.name.state.value,this.job.state.value)
 	}
 	onFinish = () => {	
+		this.props.onChangeInput(this.id.state.value,this.name.state.value,this.job.state.value)
+		console.log(this.name.state.value)
+		console.log(this.props.input_data)
 		this.props.onLoading();
 		setTimeout(()=>{
 			//随机生成错误
@@ -56,9 +60,9 @@ class Forms extends Component{
 			//成功提交
 			else{
 				if(this.state.btnText==='Add')
-					this.props.onAdd(this.state.name,this.state.id,this.state.job);
+					this.props.onAdd(this.props.input_data.name,this.props.input_data.id,this.props.input_data.job);
 				else if(this.state.btnText==='Edit')
-					this.props.onEdit(this.state.id,this.state.name,this.state.job);
+					this.props.onEdit(this.props.input_data.id,this.props.input_data.name,this.props.input_data.job);
 				this.props.onFinishData();
 				this.setState({
 					btnText:'Successfully'
@@ -79,17 +83,17 @@ class Forms extends Component{
 		return(
 		<center>
 			<Form onFinish={this.onFinish}>
-				<Input name="id" id="ID" value={this.state.id} defaultValue={new Date().toString()} type="hidden"/>
+				<Input name="id" id="ID" defaultValue={new Date().toString()}  ref={(id)=>{return this.id=id}}/>
 				<Form.Item
 					label="Todo"
 					rules={[{ required: true}]}
 				>
-					<Input name="name" value={this.state.name} required  onChange={this.handleChange}/>
+					<Input name="name" required  ref={(name)=>{return this.name=name}}/>
 				</Form.Item>
 				<Form.Item
 					label="Time"
 				>
-					<Input name="job" value={this.state.job}  onChange={this.handleChange}/>
+					<Input name="job" ref={(job)=>{return this.job=job}}/>
 				</Form.Item>
 			    <Button type="primary" htmlType="submit" loading={this.props.Loading} disabled={this.props.Loading} danger={this.state.danger}>
 			        {this.state.btnText}

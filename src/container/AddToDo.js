@@ -19,6 +19,9 @@ const mapDispatchToProps=dispatch=>{
 		onEdit:(text,id,time)=>{
 			dispatch(editToDo(text,id,time));
 		},
+		onChangeInput:(id,text,time)=>{
+			dispatch(inputData(id,text,time))
+		},
 		onLoading:()=>{
 			dispatch(isLoading(true));
 		},
