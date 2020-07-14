@@ -1,6 +1,6 @@
 import {connect} from 'react-redux';
 import Forms from '../Forms.js';
-import {addToDo,editToDo,inputData} from '../action/index'
+import {addToDo,editToDo,inputData,editState} from '../action/index'
 import {isLoading,finish,fail} from '../action/uiState'
 const mapStateToProps=state=>{
 	const storage=window.localStorage;
@@ -8,7 +8,8 @@ const mapStateToProps=state=>{
 	return {	
 		data:state.todos.data,
 		input_data:state.todos.input_data,
-		Loading:state.uiReducer.Loading
+		Loading:state.uiReducer.Loading,
+		editing:state.todos.editing
 	}
 }
 const mapDispatchToProps=dispatch=>{
@@ -27,6 +28,7 @@ const mapDispatchToProps=dispatch=>{
 		},
 		onEditClick:(id,text,time)=>{
 			dispatch(inputData(id,text,time));
+			dispatch(editState(true));
 		},
 		onFinishData:(loading)=>{
 			dispatch(finish(false));

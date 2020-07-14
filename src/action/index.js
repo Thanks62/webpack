@@ -3,6 +3,7 @@ export const ADD_TODO='ADD_TODO';
 export const DEFAULT='DEFAULT';
 export const EDIT_TODO='EDIT_TODO';
 export const INPUT_DATA='INPUT_DATA';
+export const EDIT_STATE='EDIT_STATE';
 
 export const addToDo=(text,id,time)=>{
 	return{
@@ -34,5 +35,11 @@ export const inputData=(id,text,time)=>{
 	return{
 		type:INPUT_DATA,
 		data:{id,text,time}
+	}
+}
+export const editState=(edit)=>{
+	return{
+		type:EDIT_STATE,
+		edit
 	}
 }

@@ -1,4 +1,4 @@
-import {ADD_TODO,REMOVE_TODO,DEFAULT,EDIT_TODO,INPUT_DATA} from'../action/index.js';
+import {ADD_TODO,REMOVE_TODO,DEFAULT,EDIT_TODO,INPUT_DATA, EDIT_STATE} from'../action/index.js';
 var initState={};
 function init(){
 	if (window.localStorage){
@@ -10,10 +10,12 @@ function init(){
 				id:new Date().toString(),
 				name:'',
 				job:''
-			}
+			},
+			editing:false
 			}:{
 				data:[],
-				input_data:{}
+				input_data:{},
+				editing:false
 			};
 	}
 }
@@ -41,6 +43,7 @@ export default function(state=initState,action){
 		)}
 		case EDIT_TODO:
 		let edit=[];
+		console.log(state)
 			return {
 				...state,
 				data:edit=state.data.map((li)=>{
@@ -48,8 +51,10 @@ export default function(state=initState,action){
 					li.name=action.data.text;
 					li.job=action.data.time;
 				}
-			return li;
-		})}
+				return li;
+				}),
+				editing:false
+			}
 		case INPUT_DATA:
 		return {
 			data:state.data,
@@ -58,6 +63,11 @@ export default function(state=initState,action){
 			name:action.data.text,
 			job:action.data.time
 		}}
+		case EDIT_STATE:
+		return{
+			...state,
+			editing:action.edit
+		}
 		case DEFAULT:
 		default:return state;
 	}

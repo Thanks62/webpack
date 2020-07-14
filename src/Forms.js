@@ -17,19 +17,15 @@ class Forms extends Component{
 		this.state = this.initialState;
 		//监听状态变化
 		store.subscribe(()=>{
+			console.log(this.props)
 			setTimeout(()=>{
 				this.id.state.value=this.props.input_data.id;
 				this.name.state.value=this.props.input_data.name;
 				this.job.state.value=this.props.input_data.job;
-				
-				let isEdit=this.props.data.filter((data)=>{
-					return data.id===this.props.input_data.id
-				})
-				if(isEdit!={}&&!this.props.Loading&&!this.state.err){
+				if(this.props.editing&&!this.props.Loading&&!this.state.err){
 					this.setState({
 						btnText:'Edit'
 					})
-					isEdit={};
 				}
 			},200)
 		})
@@ -87,7 +83,7 @@ class Forms extends Component{
 		return(
 		<center>
 			<Form onFinish={this.onFinish}>
-				<Input name="id" id="ID" defaultValue={new Date().toString()}  ref={(id)=>{return this.id=id}}/>
+				<Input name="id" id="ID" defaultValue={new Date().toString()}  ref={(id)=>{return this.id=id}} type="hidden"/>
 				<Form.Item
 					label="Todo"
 					rules={[{ required: true}]}
