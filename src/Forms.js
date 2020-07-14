@@ -102,12 +102,21 @@ class Forms extends Component{
 			</Form>
 		</center>)
 	}*/
+	state={
+		btnText:'Add',
+		id:new Date()
+	}
 	submit = values => {
 		// print the form values to the console
+		this.props.onAdd(values.name,values.id,values.time);
+		this.setState({
+			id:new Date(),
+			btnText:'finish'
+		})
 		console.log(values)
 	  }
 	  render() {
-		return <ReduxForm onSubmit={this.submit} />
+		return <ReduxForm onSubmit={this.submit} btnText={this.state.btnText} id={this.state.id}/>
 	  }
 }
 export default Forms;
