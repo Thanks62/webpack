@@ -8,7 +8,7 @@ class App extends Component{
 		return(
 				<Row justify="center" align="middle">
 				    <Col>
-				        <Card style={{width:600}} className="Content">
+				        <Card className="Content">
 				            <div className="container">
 				                <h1>List</h1>
 				                <p>A Todo List</p>

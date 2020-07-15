@@ -1,8 +1,11 @@
 const path = require('path');
-const HtmlWebpackPlugin=require('html-webpack-plugin');
-const {CleanWebpackPlugin}=require('clean-webpack-plugin');
+const HtmlWebpackPlugin=require('html-webpack-plugin');  //自动生成页面文件
+const {CleanWebpackPlugin}=require('clean-webpack-plugin'); //清除未使用模块
 const webpack = require('webpack');
-const BundleAnalyzerPlugin=require('webpack-bundle-analyzer').BundleAnalyzerPlugin
+const BundleAnalyzerPlugin=require('webpack-bundle-analyzer').BundleAnalyzerPlugin //可视化bundle插件
+const UglifyJsPlugin=require('uglifyjs-webpack-plugin') //压缩js 
+const ExtractTextPlugin=require('extract-text-webpack-plugin') //分离css，webpack4.0以上需要使用beta版本
+const miniCssExtractPlugin=require('mini-css-extract-plugin') //分离css,antd与index分开打包
 module.exports = {
   optimization: {
     splitChunks: {
@@ -30,10 +33,16 @@ module.exports = {
               minChunks: 2,
             },
         }
-    }
+    },
+    minimizer:[
+      new UglifyJsPlugin({
+        cache:true,
+        parallel:true
+      })
+    ]
 },
   entry: {
-    main:'./src/index.js'
+    index:'./src/index.js'
   },
   plugins:[
     new CleanWebpackPlugin(),
@@ -42,10 +51,12 @@ module.exports = {
     }),
     new webpack.NamedModulesPlugin(),
     new webpack.HotModuleReplacementPlugin(),
-    new BundleAnalyzerPlugin
+    new BundleAnalyzerPlugin,
+     new miniCssExtractPlugin({filename: '[name].[hash].css'})
+    // new ExtractTextPlugin("styles.[hash].css")
   ],
   output: {
-    filename: '[name].bundle.js',
+    filename: '[name].bundle.[hash].js',
     path: path.resolve(__dirname, 'dist')
   },
   mode:"production",
@@ -57,9 +68,12 @@ module.exports = {
     rules:[
       {
         test:/\.css$/,
-        use:[
-          'style-loader',
-          'css-loader'
+        // use:ExtractTextPlugin.extract({
+        //   fallback:"style-loader",
+        //   use:"css-loader"
+        // })
+        use:[miniCssExtractPlugin.loader,
+          {loader:'css-loader'}
         ]
       },
       {
@@ -70,7 +84,7 @@ module.exports = {
       },
       {
         test:/\.js$/,
-        exclude:/(node_modules|bower_components)/,
+        exclude:/node_modules/,
         use:{
           loader:'babel-loader',
           query:{presets:['es2015','react','stage-0']}
