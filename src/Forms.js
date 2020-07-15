@@ -102,11 +102,74 @@ class Forms extends Component{
 			</Form>
 		</center>)
 	}*/
-	submit = values => {
-		// print the form values to the console
+	constructor(props) {
+	    super(props);
+	    this.initialState = {
+			btnText:'Add',
+			danger:false,
+			loading:false
+	    };
+		this.state = this.initialState;
+		//监听状态变化
+		store.subscribe(()=>{
+			setTimeout(()=>{
+				if(this.props.editing&&!this.props.Loading&&!this.state.err){
+					this.setState({
+						btnText:'Edit'
+					})
+				}
+			},200)
+		})
+	}
+	submit = value => {
+		this.setState({
+			loading:true
+		})
+		return new Promise((resolve,reject)=>{
+			setTimeout(()=>{
+				let err=Math.random();
+				switch(true){
+					case err<0.5:resolve();break;
+					default:reject("error");break;
+				}
+				//resolve();
+				//reject("error");
+			},1000)
+		}).then(
+			(res)=>{
+				setTimeout(()=>{
+					if(this.state.btnText==='Add')
+						this.props.onAdd(value.name,value.id,value.job);
+					else if(this.state.btnText==='Edit')
+						this.props.onEdit(value.id,value.name,value.job);
+					this.props.onChangeInput(new Date(),'','')
+					this.setState({
+						btnText:'Add',
+						loading:false,
+						danger:false
+					})
+				},1000)
+			},
+			(err)=>{
+				console.log(err)
+				this.setState({
+					btnText:'Failed',
+					danger:true,
+					loading:false
+				})
+				setTimeout(()=>{
+					this.props.onChangeInput(new Date(),'','')
+					this.setState({
+						btnText:'Add',
+						loading:false,
+						danger:false
+					})
+				},1000)
+			}
+		)
 	  }
 	  render() {
-		return <ReduxForm onSubmit={this.submit} />
+		return <ReduxForm onSubmit={this.submit} state={this.state}/>
 	  }
 }
 export default Forms;

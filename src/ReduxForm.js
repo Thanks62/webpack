@@ -3,21 +3,38 @@ import { Field, reduxForm } from 'redux-form'
 import { Form, Input, Button} from 'antd';
 import { connect } from 'react-redux';
 import {addToDo,init} from './action/index'
-
+const InputToDo=({input,label})=>{
+  return(
+    <Form.Item
+					label={label}
+					rules={[{ required: true}]}
+		>
+			<Input required {...input}/>
+		</Form.Item>
+  )
+}
+const InputTime=({input,label})=>{
+  return(
+    <Form.Item
+					label={label}
+					rules={[{ required: true}]}
+		>
+			<Input {...input}/>
+		</Form.Item>
+  )
+}
 let ReduxForm = props => {
-  const { handleSubmit,Add,Init} = props
+  const { handleSubmit,Add,Init,state} = props
   return (
     <form onSubmit={handleSubmit}>
-      <Field name="id" component="input" type="text" />
+      <Field name="id" component="input" type="hidden"/>
       <div>
-        <label htmlFor="name">To Do</label>
-        <Field name="name" component="input" type="text"/>
+        <Field name="name" component={InputToDo} label="To Do"/>
       </div>
       <div>
-        <label htmlFor="job">Time</label>
-        <Field name="job" component="input" type="text" />
+        <Field name="job" component={InputTime} label="Time"/>
       </div>
-      <Button htmlType="submit">Add</Button>
+      <Button htmlType="submit" loading={state.loading} danger={state.danger} disabled={state.loading}>{state.btnText}</Button>
     </form>
   )
 }
@@ -25,11 +42,7 @@ let ReduxForm = props => {
 ReduxForm = reduxForm({
   // a unique name for the form
   form: 'contact',
-  enableReinitialize:true,
-  onSubmit:(values,dispatch)=>{
-    console.log(values);
-    dispatch(addToDo(values.name,values.id,values.job))
-  }
+  enableReinitialize:true
 })(ReduxForm)
 ReduxForm=connect(
   state=>({
