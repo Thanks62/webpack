@@ -104,7 +104,6 @@ class Forms extends Component{
 	}*/
 	submit = values => {
 		// print the form values to the console
-		console.log(values)
 	  }
 	  render() {
 		return <ReduxForm onSubmit={this.submit} />

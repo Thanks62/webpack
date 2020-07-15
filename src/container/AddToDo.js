@@ -6,6 +6,7 @@ const mapStateToProps=state=>{
 	const storage=window.localStorage;
 	if(state.todos.data) storage.setItem("list",JSON.stringify(state.todos.data));
 	return {	
+		...state,
 		data:state.todos.data,
 		input_data:state.todos.input_data,
 		Loading:state.uiReducer.Loading,
