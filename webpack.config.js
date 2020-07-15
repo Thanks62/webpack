@@ -6,6 +6,8 @@ const BundleAnalyzerPlugin=require('webpack-bundle-analyzer').BundleAnalyzerPlug
 const UglifyJsPlugin=require('uglifyjs-webpack-plugin') //压缩js 
 const ExtractTextPlugin=require('extract-text-webpack-plugin') //分离css，webpack4.0以上需要使用beta版本
 const miniCssExtractPlugin=require('mini-css-extract-plugin') //分离css,antd与index分开打包
+const TerserJSPlugin = require('terser-webpack-plugin');
+const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 module.exports = {
   optimization: {
     splitChunks: {
@@ -34,12 +36,13 @@ module.exports = {
             },
         }
     },
-    minimizer:[
-      new UglifyJsPlugin({
-        cache:true,
-        parallel:true
-      })
-    ]
+    // minimizer:[
+    //   new UglifyJsPlugin({
+    //     cache:true,
+    //     parallel:true
+    //   })
+    // ]
+    minimizer: [new TerserJSPlugin({}), new OptimizeCSSAssetsPlugin({})],
 },
   entry: {
     index:'./src/index.js'
