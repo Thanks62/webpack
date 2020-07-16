@@ -3,6 +3,7 @@ import { Field, reduxForm } from 'redux-form'
 import { Form, Input, Button} from 'antd';
 import { connect } from 'react-redux';
 import {addToDo,init} from './action/index'
+import PropTypes from 'prop-types'
 const InputToDo=({input,label})=>{
   return(
     <Form.Item
@@ -24,7 +25,7 @@ const InputTime=({input,label})=>{
   )
 }
 let ReduxForm = props => {
-  const { handleSubmit,Add,Init,state} = props
+  const { handleSubmit,state} = props
   return (
     <form onSubmit={handleSubmit}>
       <Field name="id" component="input" type="hidden"/>
@@ -38,7 +39,18 @@ let ReduxForm = props => {
     </form>
   )
 }
-
+ReduxForm.propTypes={
+    handleSubmit:PropTypes.func,
+    state:PropTypes.object
+}
+InputToDo.propTypes={
+    label:PropTypes.string,
+    input:PropTypes.object
+}
+InputTime.propTypes={
+  label:PropTypes.string,
+  input:PropTypes.object
+}
 ReduxForm = reduxForm({
   // a unique name for the form
   form: 'contact',

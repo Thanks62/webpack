@@ -34,27 +34,24 @@ export default function(state=initState,action){
 			]
 		} 
 		case REMOVE_TODO:
-		let list=[];
 		return{
 			...state,
-			data:list=state.data.filter((li)=>{
+			data:state.data.filter((li)=>{
 				return li.id!==action.id;
 			} 
 		)}
 		case EDIT_TODO:
-		let edit=[];
-		console.log(state)
-			return {
-				...state,
-				data:edit=state.data.map((li)=>{
-				if(li.id===action.data.id){
-					li.name=action.data.text;
-					li.job=action.data.time;
-				}
-				return li;
-				}),
-				editing:false
+		return {
+			...state,
+			data:state.data.map((li)=>{
+			if(li.id===action.data.id){
+				li.name=action.data.text;
+				li.job=action.data.time;
 			}
+			return li;
+			}),
+			editing:false
+		}
 		case INPUT_DATA:
 		return {
 			data:state.data,

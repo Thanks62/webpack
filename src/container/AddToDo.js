@@ -31,10 +31,10 @@ const mapDispatchToProps=dispatch=>{
 			dispatch(inputData(id,text,time));
 			dispatch(editState(true));
 		},
-		onFinishData:(loading)=>{
+		onFinishData:()=>{
 			dispatch(finish(false));
 		},
-		onFail:(loading)=>{
+		onFail:()=>{
 			dispatch(fail(false));
 		}
 	}

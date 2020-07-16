@@ -1,4 +1,4 @@
-import {createStore,combineReducers} from 'redux'
+import {createStore,combineReducers,compose} from 'redux'
 import {reducer as formReducer} from 'redux-form'
 import todos from '../reducers/todos'
 import uiReducer from '../reducers/uiReducer'

@@ -7,17 +7,17 @@ class App extends Component{
 	render(){
 		return(
 				<Row justify="center" align="middle">
-				    <Col>
-				        <Card className="Content">
-				            <div className="container">
-				                <h1>List</h1>
-				                <p>A Todo List</p>
+					<Col>
+						<Card className="Content">
+							<div className="container">
+								<h1>List</h1>
+								<p>A Todo List</p>
 								<ToDoList></ToDoList>
-				                <Divider orientation="center">Add New</Divider>
+								<Divider orientation="center">Add New</Divider>
 								<AddToDo></AddToDo>
 							</div>
-				        </Card>
-				    </Col>
+						</Card>
+					</Col>
 				</Row>
 			)
 	}
