@@ -1,8 +1,8 @@
 import React, {Component} from 'react';
-import './Form.css'
-import store from './store/index'
-import ReduxForm from './ReduxForm'
-import PropTypes from 'prop-types'
+import './Form.css';
+import store from './store/index';
+import ReduxForm from './ReduxForm';
+import PropTypes from 'prop-types';
 class Forms extends Component{
 	/*state={}
 	constructor(props) {
@@ -116,15 +116,15 @@ class Forms extends Component{
 				if(props.editing&&!props.Loading&&!this.state.err){
 					this.setState({
 						btnText:'Edit'
-					})
+					});
 				}
-			},200)
-		})
+			},200);
+		});
 	}
 	submit=(value)=> {
 		this.setState({
 			loading:true
-		})
+		});
 		return new Promise((resolve,reject)=>{
 			setTimeout(()=>{
 				let err=Math.random();
@@ -134,7 +134,7 @@ class Forms extends Component{
 				}
 				//resolve();
 				//reject("error");
-			},1000)
+			},1000);
 		}).then(
 			()=>{
 				setTimeout(()=>{
@@ -142,34 +142,34 @@ class Forms extends Component{
 						this.props.onAdd(value.name,value.id,value.job);
 					else if(this.state.btnText==='Edit')
 						this.props.onEdit(value.id,value.name,value.job);
-					this.props.onChangeInput(new Date(),'','')
+					this.props.onChangeInput(new Date(),'','');
 					this.setState({
 						btnText:'Add',
 						loading:false,
 						danger:false
-					})
-				},1000)
+					});
+				},1000);
 			},
 			(err)=>{
-				console.log(err)
+				console.log(err);
 				this.setState({
 					btnText:'Failed',
 					danger:true,
 					loading:false
-				})
+				});
 				setTimeout(()=>{
-					this.props.onChangeInput(new Date(),'','')
+					this.props.onChangeInput(new Date(),'','');
 					this.setState({
 						btnText:'Add',
 						loading:false,
 						danger:false
-					})
-				},1000)
+					});
+				},1000);
 			}
-		)
+		);
 		}
 		render() {
-			return <ReduxForm onSubmit={this.submit} state={this.state}/>
+			return <ReduxForm onSubmit={this.submit} state={this.state}/>;
 		}
 }
 Forms.protoTypes={
@@ -178,5 +178,5 @@ Forms.protoTypes={
 	onAdd:PropTypes.func,
 	onEdit:PropTypes.func,
 	onChangeInput:PropTypes.func
-}
+};
 export default Forms;

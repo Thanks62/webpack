@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { Row,Col, Divider,Card } from 'antd';
-import './App.css'
-import ToDoList from './container/ToDoList'
-import AddToDo from './container/AddToDo'
+import './App.css';
+import ToDoList from './container/ToDoList';
+import AddToDo from './container/AddToDo';
 class App extends Component{
 	render(){
 		return(
@@ -19,7 +19,7 @@ class App extends Component{
 						</Card>
 					</Col>
 				</Row>
-			)
+			);
 	}
 	
 	

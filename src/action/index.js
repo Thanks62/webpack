@@ -9,37 +9,37 @@ export const addToDo=(text,id,time)=>{
 	return{
 		type:ADD_TODO,
 		data:{text,id,time}
-	}
-}
+	};
+};
 export const removeToDo=id=>{
 	return{
 		type:REMOVE_TODO,
 		id
-	}
+	};
 	
-}
+};
 export const editToDo=(id,text,time)=>{
 	return{
 		type:EDIT_TODO,
 		data:{id,text,time}
-	}
+	};
 	
-}
+};
 export const init=()=>{
 	return{
 		type:DEFAULT,
-	}
+	};
 	
-}
+};
 export const inputData=(id,text,time)=>{
 	return{
 		type:INPUT_DATA,
 		data:{id,text,time}
-	}
-}
+	};
+};
 export const editState=(edit)=>{
 	return{
 		type:EDIT_STATE,
 		edit
-	}
-}
+	};
+};

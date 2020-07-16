@@ -5,17 +5,17 @@ export const isLoading=(loading)=>{
 	return {
 		type:IS_LOADING,
 		loading
-	}
-}
+	};
+};
 export const finish=(loading)=>{
 	return {
 		type:FINISH,
 		loading
-	}
-}
+	};
+};
 export const fail=(loading)=>{
 	return {
 		type:FAIL,
 		loading
-	}
-}
+	};
+};

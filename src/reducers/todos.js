@@ -32,14 +32,14 @@ export default function(state=initState,action){
 					job:action.data.time
 				}
 			]
-		} 
+		}; 
 		case REMOVE_TODO:
 		return{
 			...state,
 			data:state.data.filter((li)=>{
 				return li.id!==action.id;
 			} 
-		)}
+		)};
 		case EDIT_TODO:
 		return {
 			...state,
@@ -51,7 +51,7 @@ export default function(state=initState,action){
 			return li;
 			}),
 			editing:false
-		}
+		};
 		case INPUT_DATA:
 		return {
 			data:state.data,
@@ -59,12 +59,12 @@ export default function(state=initState,action){
 			id:action.data.id,
 			name:action.data.text,
 			job:action.data.time
-		}}
+		}};
 		case EDIT_STATE:
 		return{
 			...state,
 			editing:action.edit
-		}
+		};
 		case DEFAULT:
 		default:return state;
 	}

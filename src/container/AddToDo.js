@@ -1,7 +1,7 @@
 import {connect} from 'react-redux';
 import Forms from '../Forms.js';
-import {addToDo,editToDo,inputData,editState} from '../action/index'
-import {isLoading,finish,fail} from '../action/uiState'
+import {addToDo,editToDo,inputData,editState} from '../action/index';
+import {isLoading,finish,fail} from '../action/uiState';
 const mapStateToProps=state=>{
 	const storage=window.localStorage;
 	if(state.todos.data) storage.setItem("list",JSON.stringify(state.todos.data));
@@ -11,8 +11,8 @@ const mapStateToProps=state=>{
 		input_data:state.todos.input_data,
 		Loading:state.uiReducer.Loading,
 		editing:state.todos.editing
-	}
-}
+	};
+};
 const mapDispatchToProps=dispatch=>{
 	return {
 		onAdd:(text,id,time)=>{
@@ -22,7 +22,7 @@ const mapDispatchToProps=dispatch=>{
 			dispatch(editToDo(text,id,time));
 		},
 		onChangeInput:(id,text,time)=>{
-			dispatch(inputData(id,text,time))
+			dispatch(inputData(id,text,time));
 		},
 		onLoading:()=>{
 			dispatch(isLoading(true));
@@ -37,7 +37,7 @@ const mapDispatchToProps=dispatch=>{
 		onFail:()=>{
 			dispatch(fail(false));
 		}
-	}
-}
-const AddToDo =connect(mapStateToProps,mapDispatchToProps)(Forms)
+	};
+};
+const AddToDo =connect(mapStateToProps,mapDispatchToProps)(Forms);
 export default AddToDo;

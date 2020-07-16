@@ -1,9 +1,9 @@
-import React from 'react'
-import { Field, reduxForm } from 'redux-form'
+import React from 'react';
+import { Field, reduxForm } from 'redux-form';
 import { Form, Input, Button} from 'antd';
 import { connect } from 'react-redux';
-import {addToDo,init} from './action/index'
-import PropTypes from 'prop-types'
+import {addToDo,init} from './action/index';
+import PropTypes from 'prop-types';
 const InputToDo=({input,label})=>{
   return(
     <Form.Item
@@ -12,8 +12,8 @@ const InputToDo=({input,label})=>{
 		>
 			<Input required {...input}/>
 		</Form.Item>
-  )
-}
+  );
+};
 const InputTime=({input,label})=>{
   return(
     <Form.Item
@@ -22,10 +22,10 @@ const InputTime=({input,label})=>{
 		>
 			<Input {...input}/>
 		</Form.Item>
-  )
-}
+  );
+};
 let ReduxForm = props => {
-  const { handleSubmit,state} = props
+  const { handleSubmit,state} = props;
   return (
     <form onSubmit={handleSubmit}>
       <Field name="id" component="input" type="hidden"/>
@@ -37,28 +37,28 @@ let ReduxForm = props => {
       </div>
       <Button htmlType="submit" loading={state.loading} danger={state.danger} disabled={state.loading}>{state.btnText}</Button>
     </form>
-  )
-}
+  );
+};
 ReduxForm.propTypes={
     handleSubmit:PropTypes.func,
     state:PropTypes.object
-}
+};
 InputToDo.propTypes={
     label:PropTypes.string,
     input:PropTypes.object
-}
+};
 InputTime.propTypes={
   label:PropTypes.string,
   input:PropTypes.object
-}
+};
 ReduxForm = reduxForm({
   // a unique name for the form
   form: 'contact',
   enableReinitialize:true
-})(ReduxForm)
+})(ReduxForm);
 ReduxForm=connect(
   state=>({
     initialValues:state.todos.input_data
   }),{Add:addToDo,Init:init}
-)(ReduxForm)
-export default ReduxForm
+)(ReduxForm);
+export default ReduxForm;

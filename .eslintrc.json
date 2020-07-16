@@ -20,6 +20,10 @@
     ],
     "rules": {
         "react/prop-types":"off",
-        "no-alert":1
+        "no-alert":1,
+        "no-console":1,
+        "eqeqeq":1,
+        "semi":[1,"always"],
+        "no-multi-spaces":1
     }
 }
