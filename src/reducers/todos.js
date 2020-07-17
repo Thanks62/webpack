@@ -1,13 +1,13 @@
 import {ADD_TODO,REMOVE_TODO,DEFAULT,EDIT_TODO,INPUT_DATA, EDIT_STATE} from'../action/index.js';
+import {GetData} from '../storage/storage';
 var initState={};
 function init(){
 	if (window.localStorage){
-        const storage=window.localStorage;
-        let list=storage.getItem("list");
+		let list=GetData("list");
         initState=JSON.parse(list)?{
 			data:JSON.parse(list),
 			input_data:{
-				id:new Date().toString(),
+				id:'',
 				name:'',
 				job:''
 			},

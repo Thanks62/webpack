@@ -113,7 +113,7 @@ class Forms extends Component{
 		//监听状态变化
 		store.subscribe(()=>{
 			setTimeout(()=>{
-				if(props.editing&&!props.Loading&&!this.state.err){
+				if(this.props.editing&&!props.Loading){
 					this.setState({
 						btnText:'Edit'
 					});
@@ -132,17 +132,16 @@ class Forms extends Component{
 					case err<0.5:resolve();break;
 					default:reject("error");break;
 				}
-				//resolve();
-				//reject("error");
 			},1000);
 		}).then(
 			()=>{
 				setTimeout(()=>{
-					if(this.state.btnText==='Add')
-						this.props.onAdd(value.name,value.id,value.job);
-					else if(this.state.btnText==='Edit')
+					if(this.props.input_data.id){
 						this.props.onEdit(value.id,value.name,value.job);
-					this.props.onChangeInput(new Date(),'','');
+					}
+					else
+						this.props.onAdd(value.name,new Date(),value.job);
+					this.props.onChangeInput('','','');
 					this.setState({
 						btnText:'Add',
 						loading:false,
@@ -150,17 +149,13 @@ class Forms extends Component{
 					});
 				},1000);
 			},
-			(err)=>{
-				console.log(err);
+			()=>{
 				this.setState({
-					btnText:'Failed',
 					danger:true,
 					loading:false
 				});
 				setTimeout(()=>{
-					this.props.onChangeInput(new Date(),'','');
 					this.setState({
-						btnText:'Add',
 						loading:false,
 						danger:false
 					});
