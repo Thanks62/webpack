@@ -2,8 +2,6 @@ import {connect} from 'react-redux';
 import {removeToDo,inputData,editState} from '../action/index';
 import Tables from '../Tables';
 const mapsStateToProps=state=>{
-	const storage=window.localStorage;
-	if(state.todos.data) storage.setItem("list",JSON.stringify(state.todos.data));
 	return{	
 		data:state.todos.data,
 		input_data:state.todos.input_data,

@@ -1,0 +1,11 @@
+{
+    "title":"计划表",
+    "btn_Add":"添加",
+    "btn_Edit":"编辑",
+    "subTitle":"记录你的每日计划",
+    "addNew":"新增计划",
+    "label_todo":"计划",
+    "label_time":"时间",
+    "btn_Delete":"删除",
+    "operation":"操作"
+}

@@ -4,7 +4,9 @@ import {addToDo,editToDo,inputData,editState} from '../action/index';
 import {isLoading,finish,fail} from '../action/uiState';
 import {SetData} from '../storage/storage';
 const mapStateToProps=state=>{
-	if(state.todos.data) SetData("list",JSON.stringify(state.todos.data));
+	if(state.todos.data) SetData("list",state.todos.data);
+	// const storage=window.localStorage;
+	// if(state.todos.data) storage.setItem("list",JSON.stringify(state.todos.data));
 	return {	
 		...state,
 		data:state.todos.data,

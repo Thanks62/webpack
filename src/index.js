@@ -3,6 +3,7 @@ import { render } from 'react-dom';
 import { Provider } from 'react-redux';
 import store from './store/index';
 import App from './App';
+import './i18n';
 //ReactDOM.render(<App />, document.getElementById('root'));
 
 function component() {

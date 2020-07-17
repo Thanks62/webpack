@@ -1,0 +1,11 @@
+{
+    "title":"To Do List",
+    "btn_Add":"Add",
+    "btn_Edit":"Edit",
+    "subTitle":"Write down your daily plans",
+    "addNew":"Add New",
+    "label_todo":"To Do",
+    "label_time":"Time",
+    "btn_Delete":"Delete",
+    "operation":"Operation"
+}
