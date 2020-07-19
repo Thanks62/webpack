@@ -5,6 +5,7 @@ import { connect } from 'react-redux';
 import {addToDo,init} from './action/index';
 import PropTypes from 'prop-types';
 import {useTranslation} from 'react-i18next';
+import './Form.css'
 const InputToDo=({input,label})=>{
   return(
     <Form.Item
@@ -27,7 +28,7 @@ const InputTime=({input,label})=>{
 };
 let ReduxForm = props => {
   const {t}=useTranslation();
-  const { handleSubmit,state} = props;
+  const { handleSubmit,state,reset} = props;
   return (
     <form onSubmit={handleSubmit}>
       <Field name="id" component="input" type="hidden"/>
@@ -37,8 +38,9 @@ let ReduxForm = props => {
       <div>
         <Field name="job" component={InputTime} label={t("label_time")}/>
       </div>
-      <Button htmlType="submit" loading={state.loading} danger={state.danger} disabled={state.loading}>{state.btnText==='Edit'?t("btn_Edit"):t("btn_Add")}</Button>
-    </form>
+      <Button type="primary" htmlType="submit" loading={state.loading} danger={state.danger} disabled={state.loading} className="btn">{state.btnText==='Edit'?t("btn_Edit"):t("btn_Add")}</Button>
+	  <Button onClick={reset} disabled={state.loading}>{t("btn_Reset")}</Button>
+	</form>
   );
 };
 ReduxForm.propTypes={

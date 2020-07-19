@@ -7,5 +7,6 @@
     "label_todo":"计划",
     "label_time":"时间",
     "btn_Delete":"删除",
+	"btn_Reset":"重置输入",
     "operation":"操作"
 }

@@ -7,5 +7,6 @@
     "label_todo":"To Do",
     "label_time":"Time",
     "btn_Delete":"Delete",
+	"btn_Reset":"Reset Changes",
     "operation":"Operation"
 }

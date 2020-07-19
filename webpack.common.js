@@ -36,12 +36,6 @@ module.exports = {
             },
         }
     },
-    // minimizer:[
-    //   new UglifyJsPlugin({
-    //     cache:true,
-    //     parallel:true
-    //   })
-    // ]
     minimizer: [new TerserJSPlugin({}), new OptimizeCSSAssetsPlugin({})],
 },
   entry: {
@@ -52,29 +46,24 @@ module.exports = {
     new HtmlWebpackPlugin({
       title:'start'
     }),
-    new webpack.NamedModulesPlugin(),
-    new webpack.HotModuleReplacementPlugin(),
+    //new webpack.NamedModulesPlugin(),
+    //new webpack.HotModuleReplacementPlugin(),
     new BundleAnalyzerPlugin,
      new miniCssExtractPlugin({filename: '[name].[hash].css'})
-    // new ExtractTextPlugin("styles.[hash].css")
   ],
   output: {
     filename: '[name].bundle.[hash].js',
     path: path.resolve(__dirname, 'dist')
   },
-  mode:"production",
-  devServer:{
-    contentBase:'./dist',
-    hot:true
-  },
+  // mode:"production",
+  // devServer:{
+  //   contentBase:'./dist',
+  //   hot:true
+  // },
   module:{
     rules:[
       {
         test:/\.css$/,
-        // use:ExtractTextPlugin.extract({
-        //   fallback:"style-loader",
-        //   use:"css-loader"
-        // })
         use:[miniCssExtractPlugin.loader,
           {loader:'css-loader'}
         ]
