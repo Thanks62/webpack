@@ -1,3 +1,4 @@
+/* eslint-disable*/
 const path = require('path');
 const HtmlWebpackPlugin=require('html-webpack-plugin');  //自动生成页面文件
 const {CleanWebpackPlugin}=require('clean-webpack-plugin'); //清除未使用模块

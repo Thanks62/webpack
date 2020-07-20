@@ -12,7 +12,7 @@ const InputToDo=({input,label})=>{
 					label={label}
 					rules={[{ required: true}]}
 		>
-			<Input required {...input}/>
+			<Input required {...input} className="todo"/>
 		</Form.Item>
   );
 };
@@ -38,8 +38,8 @@ let ReduxForm = props => {
       <div>
         <Field name="job" component={InputTime} label={t("label_time")}/>
       </div>
-      <Button type="primary" htmlType="submit" loading={state.loading} danger={state.danger} disabled={state.loading} className="btn">{state.btnText==='Edit'?t("btn_Edit"):t("btn_Add")}</Button>
-	  <Button onClick={reset} disabled={state.loading}>{t("btn_Reset")}</Button>
+      <Button id="submit_btn" type="primary" htmlType="submit" loading={state.loading} danger={state.danger} disabled={state.loading} className="btn">{state.btnText==='Edit'?t("btn_Edit"):t("btn_Add")}</Button>
+	    <Button onClick={reset} disabled={state.loading}>{t("btn_Reset")}</Button>
 	</form>
   );
 };
