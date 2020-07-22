@@ -1,5 +1,5 @@
 /* eslint-disable */
-import {GetData,SetData} from './storage/storage.js';
+import {GetData,SetData} from '../storage/storage.js';
 import {toMatchImageSnapshot} from 'jest-image-snapshot';
 const puppeteer = require('puppeteer');
 expect.extend({toMatchImageSnapshot});

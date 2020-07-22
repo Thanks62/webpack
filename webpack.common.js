@@ -45,16 +45,17 @@ module.exports = {
   plugins:[
     new CleanWebpackPlugin(),
     new HtmlWebpackPlugin({
-      title:'start'
+      title:'start',
+      filename:'../view/index.html'
     }),
     //new webpack.NamedModulesPlugin(),
     //new webpack.HotModuleReplacementPlugin(),
     new BundleAnalyzerPlugin,
-     new miniCssExtractPlugin({filename: '[name].[hash].css'})
+    new miniCssExtractPlugin({filename: '[name].[hash].css'})
   ],
   output: {
     filename: '[name].bundle.[hash].js',
-    path: path.resolve(__dirname, 'dist')
+    path: path.resolve(__dirname, 'dist/public')
   },
   // mode:"production",
   // devServer:{
