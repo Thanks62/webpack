@@ -39,11 +39,12 @@ module.exports = {
     },
     minimizer: [new TerserJSPlugin({}), new OptimizeCSSAssetsPlugin({})],
 },
+devtool:'inline-source-map',
   entry: {
     index:'./src/index.js'
   },
   plugins:[
-    new CleanWebpackPlugin(),
+    //new CleanWebpackPlugin(),
     new HtmlWebpackPlugin({
       title:'start',
       filename:'../view/index.html'
@@ -51,10 +52,10 @@ module.exports = {
     //new webpack.NamedModulesPlugin(),
     //new webpack.HotModuleReplacementPlugin(),
     new BundleAnalyzerPlugin,
-    new miniCssExtractPlugin({filename: '[name].[hash].css'})
+    new miniCssExtractPlugin({filename: '[name].css'})
   ],
   output: {
-    filename: '[name].bundle.[hash].js',
+    filename: '[name].bundle.js',
     path: path.resolve(__dirname, 'dist/public')
   },
   // mode:"production",

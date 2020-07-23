@@ -2,15 +2,31 @@
 // 引入模块
 var express = require('express');
 var path = require('path');
- var ejs = require('ejs');
+var ejs = require('ejs');
+const fetch=require('node-fetch');
+const bodyParser=require('body-parser');
 
 var app = express();
-
+app.use(bodyParser.urlencoded({ extended: false }));
 // 对所有(/)URL或路由返回index.html 
+app.get('/getData', function (req, res) {
+    const action=require('./service/action/getData');
+    action.excute(req,res);
+});
 app.get('/', function (req, res) {
     res.render('index');
 });
-
+app.post('/getData',function(req,res){
+    const action=require('./service/action/getData');
+    switch (req.body.operation){
+        case "add":action.addData(req,res);break;
+        case "edit":action.editData(req,res);break;
+        case "delete":action.deleteData(req,res);break;
+        default: break;
+    }
+    
+    
+})
 // 设置views路径和模板
 app.set('views', path.join(__dirname, 'dist/view'));
 app.set('view engine', 'html');

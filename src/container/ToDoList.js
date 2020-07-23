@@ -1,5 +1,5 @@
 import {connect} from 'react-redux';
-import {removeToDo,inputData,editState} from '../action/index';
+import {removeToDo,inputData,editState,init} from '../action/index';
 import Tables from '../Tables';
 const mapsStateToProps=state=>{
 	return{	
@@ -12,11 +12,23 @@ const mapsStateToProps=state=>{
 const mapDispatchToProps=dispatch=>{
 	return{
 		onRemove:id=>{
+			fetch('http://localhost:8888/getData',{
+				method:"POST",
+				headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded'
+				},
+				body:`id=${id}&operation=delete`
+			}).then(res=>{
+				console.log(res);
+			});
 			dispatch(removeToDo(id));
 		},
 		onEditClick:(id,text,time)=>{
 			dispatch(inputData(id,text,time));
 			dispatch(editState(true));
+		},
+		onInit:(data,input_data,editing)=>{
+			dispatch(init(data,input_data,editing));
 		}
 	};
 };

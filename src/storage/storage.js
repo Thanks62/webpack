@@ -5,13 +5,3 @@ export const SetData=(sto,data)=>{
 export const GetData=(sto)=>{
     return storage.getItem(sto);
 };
-
-// export const getRequestData(){
-//     axios.get('http://loacalhost:9000/',{
-//         params:{
-//             id:'test'
-//         }
-//     }).then((res)=>{
-//         console.log(res);
-//     })
-// }

@@ -13,7 +13,7 @@
     "lint-fix": "eslint --fix --ext .js --fix --ext .jsx src",
     "test": "jest",
     "test_cover": "jest --coverage",
-    "express":"node app.js"
+    "express": "node app.js"
   },
   "keywords": [],
   "author": "",
@@ -53,9 +53,11 @@
     "@babel/core": "^7.10.4",
     "@babel/preset-env": "^7.10.4",
     "antd": "^4.4.1",
+    "body-parser": "^1.19.0",
     "ejs": "^3.1.3",
     "express": "^4.17.1",
     "i18next": "^19.6.2",
+    "node-fetch": "^2.6.0",
     "prop-types": "^15.7.2",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",

@@ -25,8 +25,9 @@ export const editToDo=(id,text,time)=>{
 	};
 	
 };
-export const init=()=>{
+export const init=(data,input_data,editing)=>{
 	return{
+		data:{data,input_data,editing},
 		type:DEFAULT,
 	};
 	

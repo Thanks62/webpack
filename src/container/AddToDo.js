@@ -2,9 +2,9 @@ import {connect} from 'react-redux';
 import Forms from '../Forms.js';
 import {addToDo,editToDo,inputData,editState} from '../action/index';
 import {isLoading,finish,fail} from '../action/uiState';
-import {SetData} from '../storage/storage';
+//import {SetData} from '../storage/storage';
 const mapStateToProps=state=>{
-	if(state.todos.data) SetData("list",state.todos.data);
+	//if(state.todos.data) SetData("list",state.todos.data);
 	// const storage=window.localStorage;
 	// if(state.todos.data) storage.setItem("list",JSON.stringify(state.todos.data));
 	return {	
@@ -18,10 +18,28 @@ const mapStateToProps=state=>{
 const mapDispatchToProps=dispatch=>{
 	return {
 		onAdd:(text,id,time)=>{
+			fetch('http://localhost:8888/getData',{
+				method:"POST",
+				headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded'
+				},
+				body:`id=${id}&todo=${text}&time=${time}&operation=add`
+			}).then(res=>{
+				console.log(res);
+			});
 			dispatch(addToDo(text,id,time));
 		},
-		onEdit:(text,id,time)=>{
-			dispatch(editToDo(text,id,time));
+		onEdit:(id,text,time)=>{
+			fetch('http://localhost:8888/getData',{
+				method:"POST",
+				headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded'
+				},
+				body:`id=${id}&todo=${text}&time=${time}&operation=edit`
+			}).then(res=>{
+				console.log(res);
+			});
+			dispatch(editToDo(id,text,time));
 		},
 		onChangeInput:(id,text,time)=>{
 			dispatch(inputData(id,text,time));
