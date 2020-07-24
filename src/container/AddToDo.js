@@ -12,7 +12,8 @@ const mapStateToProps=state=>{
 		data:state.todos.data,
 		input_data:state.todos.input_data,
 		Loading:state.uiReducer.Loading,
-		editing:state.todos.editing
+		editing:state.todos.editing,
+		loadData:state.todos.loadData
 	};
 };
 const mapDispatchToProps=dispatch=>{

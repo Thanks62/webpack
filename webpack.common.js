@@ -44,7 +44,7 @@ devtool:'inline-source-map',
     index:'./src/index.js'
   },
   plugins:[
-    //new CleanWebpackPlugin(),
+    new CleanWebpackPlugin(),
     new HtmlWebpackPlugin({
       title:'start',
       filename:'../view/index.html'
@@ -52,10 +52,10 @@ devtool:'inline-source-map',
     //new webpack.NamedModulesPlugin(),
     //new webpack.HotModuleReplacementPlugin(),
     new BundleAnalyzerPlugin,
-    new miniCssExtractPlugin({filename: '[name].css'})
+    new miniCssExtractPlugin({filename: '[name].[hash].css'})
   ],
   output: {
-    filename: '[name].bundle.js',
+    filename: '[name].bundle.[hash].js',
     path: path.resolve(__dirname, 'dist/public')
   },
   // mode:"production",

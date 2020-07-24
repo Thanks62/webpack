@@ -3,7 +3,6 @@
 var express = require('express');
 var path = require('path');
 var ejs = require('ejs');
-const fetch=require('node-fetch');
 const bodyParser=require('body-parser');
 
 var app = express();

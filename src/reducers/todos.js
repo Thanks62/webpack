@@ -4,47 +4,9 @@ import {ADD_TODO,REMOVE_TODO,DEFAULT,EDIT_TODO,INPUT_DATA, EDIT_STATE} from'../a
 var initState={
 	data:[],
 	input_data:{},
-	editing:false
+	editing:false,
+	loadData:true
 };
-// function init(callback){
-// 	if (window.localStorage){
-// 		//let list=GetData("list");
-// 		//let list=await GetDataSource();
-// 		fetch('http://localhost:8888/getData').then(function(response) {
-//         if (response.ok) {
-// 			response.json().then(function(data) {
-// 			var list=data;
-// 			initState=list?{
-// 				data:list,
-// 				input_data:{
-// 					id:'',
-// 					name:'',
-// 					job:''
-// 				},
-// 				editing:false
-// 				}:{
-// 					data:[],
-// 					input_data:{},
-// 					editing:false
-// 				};
-// 				callback(initState);
-// 			});
-//         } else {
-// 			console.log(response.status);
-// 			}
-// 		}, function(e) {
-// 			console.log("Fetch failed!", e);
-// 		});
-// 	}
-	
-// }
-
-// init(function(data){
-// 	initState=data;
-// 	action(initState,{type:DEFAULT});
-// 	console.log("init",initState);
-// 	return initState;
-// });
 export default function action(state=initState,action){
 	switch(action.type){
 		case ADD_TODO:return{
@@ -94,11 +56,7 @@ export default function action(state=initState,action){
 		return {
 			...state,
 			data: action.data.data,
-			// data:[
-			// 	{id:'ss',
-			// 	name:'22',
-			// 	job:'ss'}
-			// ],
+			loadData:action.data.loadData,
 			input_data:action.data.input_data
         };
 		default:return state;
