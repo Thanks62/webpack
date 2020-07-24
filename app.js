@@ -8,6 +8,11 @@ const bodyParser=require('body-parser');
 var app = express();
 app.use(bodyParser.urlencoded({ extended: false }));
 // 对所有(/)URL或路由返回index.html 
+app.use('',function(req,res,next){
+    res.setHeader('Access-Control-Allow-Origin','*');
+    res.setHeader('Access-Control-Allow-Methods','POST')
+    next();
+})
 app.get('/getData', function (req, res) {
     const action=require('./service/action/getData');
     action.excute(req,res);

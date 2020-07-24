@@ -15,6 +15,7 @@ const mapDispatchToProps=dispatch=>{
 		onRemove:id=>{
 			fetch('http://localhost:8888/getData',{
 				method:"POST",
+				mode:'cors',
 				headers: {
                     'Content-Type': 'application/x-www-form-urlencoded'
 				},
