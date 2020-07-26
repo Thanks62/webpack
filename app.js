@@ -14,8 +14,13 @@ app.use('',function(req,res,next){
     next();
 })
 app.get('/getData', function (req, res) {
-    const action=require('./service/action/getData');
-    action.excute(req,res);
+    // const action=require('./service/action/getData');
+    // action.excute(req,res);
+	const db=require('./service/dataBase/db.js');
+	db.query('SELECT * FROM todo',[],function(result){
+		res.send(result);
+		console.log(result);
+	})
 });
 app.get('/', function (req, res) {
     res.render('index');
